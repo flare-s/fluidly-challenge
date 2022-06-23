@@ -70,9 +70,21 @@ describe('assertEquals', () => {
     })
   })
 
-  describe('when expected and actual have a string with the same value but different case type', () => {
+  describe('when expected and actual arrays have a string with the same value but different case type', () => {
     it('throws an error', () => {
       expect(() => assertEquals([1, "abc", 3], [1, "AbC", 3])).toThrow(`Expected "abc" but found "AbC". Please check the string type case.`)
+    })
+  })
+
+  describe('when expected and actual arrays have a nested array but with different values', () => {
+    it('throws an error', () => {
+      expect(() => assertEquals([1, ["abc", 1], 3], [1, ["abc", 2], 3])).toThrow(`Expected 1 but found 2`)
+    })
+  })
+
+  describe('when expected and actual arrays have a nested array with different types in them', () => {
+    it('throws an error', () => {
+      expect(() => assertEquals([1, ["abc", [1, [null]]], 3], [1, ["abc", [1, [{}]]], 3])).toThrow(`Expected type null but found object`)
     })
   })
 
