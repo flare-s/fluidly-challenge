@@ -1,4 +1,4 @@
-# Fluidly home and pairing test
+# Fluidly challenge
 
 ## The challenge
 
