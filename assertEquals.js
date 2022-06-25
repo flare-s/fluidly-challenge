@@ -38,9 +38,7 @@ const equalToThisArray = (arr1, value) =>{
                 // Check if we have nested arrays
                 if ( Array.isArray(arr1[i]) && Array.isArray(value[i])) {
                     // recurse into the nested arrays
-                    if (!equalToThisArray(arr1[i], value[i])) {
-                        return false;     
-                    }  
+                    equalToThisArray(arr1[i], value[i]);
                 }           
                 else if (arr1[i] !== value[i]) { 
                     return checkNotEquals(arr1[i], value[i]);
@@ -82,5 +80,6 @@ const checkDifferentTypes = (value1, value2) => {
     }
     throw new Error(`Expected ${value1} but found ${value2}`);
 }
+
 
 module.exports = assertEquals;
