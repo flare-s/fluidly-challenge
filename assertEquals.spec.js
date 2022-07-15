@@ -107,4 +107,67 @@ describe('assertEquals', () => {
     })
   })
 
+  // Objects tests
+
+  describe('when expected and actual are objects but actual does not have one of the expected keys', () => {
+    it('throws an error', () => {
+      const expected = {
+        name: "Ryan"
+      };
+      const actual = {
+        age: 40
+      };
+      expect(() => assertEquals(expected, actual)).toThrow(`Expected the  property name but it's not there.`)
+    })
+  })
+
+  describe('when expected and actual are objects but actual have a key that expected does not have', () => {
+    it('throws an error', () => {
+      const expected = {
+        name: "Ryan",
+        age: 40
+      };
+      const actual = {
+        name: "Ryan",
+        age: 40,
+        city: "Paris"
+
+      };
+      expect(() => assertEquals(expected, actual)).toThrow(`The property city does not exist in the expected object`)
+    })
+  })
+
+  describe('when expected and actual are the same object with the same values', () => {
+    it('throws an error', () => {
+      const expected = {
+        name: "Ryan",
+        content: [1, 2, [null, [undefined]]],
+        logged: false
+      };
+      const actual = {
+        name: "Ryan",
+        content: [1, 2, [null, [undefined]]],
+        logged: false
+      };
+      expect(() => typeof assertEquals(expected, actual) === "boolean").toBeTruthy()
+    })
+  })
+
+
+  describe('when expected and actual are the same objects with different values', () => {
+    it('throws an error', () => {
+      const expected = {
+        name: "Ryan",
+        content: [1, 2, [null, [undefined, {}]]],
+        logged: false
+      };
+      const actual = {
+        name: "Ryan",
+        content: [1, 2, [null, [undefined, []]]],
+        logged: false
+      };
+      expect(() => assertEquals(expected, actual)).toThrow("Expected type object but found array")
+    })
+  })
+
 })
